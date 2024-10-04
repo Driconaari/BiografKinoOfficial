@@ -1,6 +1,7 @@
 package com.example.biografkinoofficial.controller;
 
-import com.example.kinozippy.entity.Movie;
+
+import com.example.biografkinoofficial.entity.Movie;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

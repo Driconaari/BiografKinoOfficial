@@ -1,7 +1,7 @@
 package com.example.biografkinoofficial.service;
 
-import com.example.kinozippy.entity.Ticket;
-import com.example.kinozippy.repository.TicketRepository;
+import com.example.biografkinoofficial.entity.Ticket;
+import com.example.biografkinoofficial.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

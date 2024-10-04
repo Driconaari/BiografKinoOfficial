@@ -1,7 +1,8 @@
 package com.example.biografkinoofficial.controller;
 
-import com.example.kinozippy.entity.UserLogin;
-import com.example.kinozippy.repository.UserRepository;
+
+import com.example.biografkinoofficial.entity.UserLogin;
+import com.example.biografkinoofficial.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

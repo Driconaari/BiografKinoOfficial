@@ -2,8 +2,10 @@
 // MovieController.java
 package com.example.biografkinoofficial.controller;
 
-import com.example.kinozippy.entity.Movie;
-import com.example.kinozippy.service.MovieService;
+
+
+import com.example.biografkinoofficial.entity.Movie;
+import com.example.biografkinoofficial.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
