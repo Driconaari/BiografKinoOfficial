@@ -1,6 +1,6 @@
 package com.example.biografkinoofficial.repository;
 
-import com.example.kinozippy.entity.Movie;
+import com.example.biografkinoofficial.entity.Movie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
