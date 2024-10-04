@@ -37,6 +37,37 @@
       }
     }
 
+    // Function to handle purchase confirmation
+    function confirmPurchase() {
+      const selectedSeats = document.querySelectorAll('.seat.selected');
+      const seatNumbers = Array.from(selectedSeats).map(seat => seat.textContent);
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+
+      if (seatNumbers.length === 0) {
+        alert("Please select at least one seat.");
+        return;
+      }
+
+      if (!email || !phone) {
+        alert("Please enter your email and phone number.");
+        return;
+      }
+
+      // Here you would normally send this data to your server
+      alert(`You have selected seats: ${seatNumbers.join(', ')}\nEmail: ${email}\nPhone: ${phone}`);
+
+      // Optionally, you could send the data via a POST request here
+      // For example:
+      // fetch('/api/tickets/buy', {
+      //     method: 'POST',
+      //     body: JSON.stringify({ seats: seatNumbers, email, phone }),
+      //     headers: {
+      //         'Content-Type': 'application/json'
+      //     }
+      // });
+    }
+
     // Call function on page load
     window.onload = generateSeatRows;
   </script>
@@ -56,6 +87,23 @@
     .seat.selected {
       background-color: #FF5733; /* Red */
     }
+    /* Form styling */
+    .form-section {
+      margin-top: 20px;
+    }
+    .form-section input {
+      margin: 5px 0;
+      padding: 10px;
+      width: calc(100% - 22px); /* Adjust width for padding */
+    }
+    .button {
+      padding: 10px 15px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -66,7 +114,12 @@
 <main>
   <h2>Select Your Seats</h2>
   <div id="seatContainer"></div>
-  <button id="confirmPurchase" class="button">Confirm Purchase</button>
+  <div class="form-section">
+    <h3>Your Information</h3>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="tel" id="phone" placeholder="Phone Number" required>
+    <button id="confirmPurchase" class="button" onclick="confirmPurchase()">Confirm Purchase</button>
+  </div>
 </main>
 
 <footer>
