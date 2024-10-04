@@ -15,6 +15,7 @@
       for (let i = 0; i < rows; i++) {
         const rowDiv = document.createElement('div');
         rowDiv.className = 'seat-row';
+
         for (let j = 1; j <= seatsPerRow; j++) {
           const seatButton = document.createElement('button');
           seatButton.className = 'seat';
@@ -83,6 +84,8 @@
       color: white;
       border: none;
       cursor: pointer;
+      border-radius: 5px; /* Rounded corners */
+      transition: background-color 0.3s; /* Smooth color change */
     }
     .seat.selected {
       background-color: #FF5733; /* Red */
@@ -95,6 +98,8 @@
       margin: 5px 0;
       padding: 10px;
       width: calc(100% - 22px); /* Adjust width for padding */
+      border-radius: 5px; /* Rounded corners */
+      border: 1px solid #ccc;
     }
     .button {
       padding: 10px 15px;
@@ -103,6 +108,11 @@
       border: none;
       cursor: pointer;
       margin-top: 10px;
+      border-radius: 5px; /* Rounded corners */
+      transition: background-color 0.3s; /* Smooth color change */
+    }
+    .button:hover {
+      background-color: #0056b3; /* Darker blue on hover */
     }
   </style>
 </head>
