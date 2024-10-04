@@ -3,40 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Purchase Tickets</title>
-  <link rel="stylesheet" href="/css/styles.css"> <!-- Adjusted to serve static CSS -->
+  <title>Purchase Tickets - KinoXP Cinema</title>
+  <link rel="stylesheet" href="/css/styles.css"> <!-- Link your CSS file -->
+  <script>
+    // JavaScript function to generate seat rows
+    function generateSeatRows() {
+      const seatContainer = document.getElementById('seatContainer');
+      const rows = 5; // Number of rows
+      const seatsPerRow = 10; // Number of seats per row
+
+      for (let i = 0; i < rows; i++) {
+        const rowDiv = document.createElement('div');
+        rowDiv.className = 'seat-row';
+        for (let j = 1; j <= seatsPerRow; j++) {
+          const seatButton = document.createElement('button');
+          seatButton.className = 'seat';
+          seatButton.textContent = `${String.fromCharCode(65 + i)}${j}`; // Generate seat label (A1, A2,...)
+          seatButton.onclick = function() {
+            selectSeat(seatButton);
+          };
+          rowDiv.appendChild(seatButton);
+        }
+        seatContainer.appendChild(rowDiv);
+      }
+    }
+
+    // Function to handle seat selection
+    function selectSeat(seatButton) {
+      if (seatButton.classList.contains('selected')) {
+        seatButton.classList.remove('selected');
+      } else {
+        seatButton.classList.add('selected');
+      }
+    }
+
+    // Call function on page load
+    window.onload = generateSeatRows;
+  </script>
+  <style>
+    /* Basic styling */
+    .seat-row {
+      margin: 10px 0;
+    }
+    .seat {
+      margin: 0 5px;
+      padding: 10px;
+      background-color: #4CAF50; /* Green */
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .seat.selected {
+      background-color: #FF5733; /* Red */
+    }
+  </style>
 </head>
 <body>
 <header>
   <h1>Purchase Tickets</h1>
 </header>
 
-<!-- Ticket Purchase Form -->
-<section id="ticketPurchaseSection">
+<main>
   <h2>Select Your Seats</h2>
-  <div id="theaterSeating" class="theater-seating"></div>
-
-  <h3>Your Selected Seats:</h3>
-  <div id="selectedSeatsDisplay"></div>
-
-  <form id="ticketPurchaseForm" class="form">
-    <label for="movieId">Movie ID:</label>
-    <input type="text" id="movieId" required>
-
-    <label for="email">Email:</label>
-    <input type="email" id="email" required>
-
-    <label for="phone">Phone Number:</label>
-    <input type="tel" id="phone" required>
-
-    <button type="button" class="button" id="mobilePayButton">Pay with MobilePay</button>
-  </form>
-</section>
+  <div id="seatContainer"></div>
+  <button id="confirmPurchase" class="button">Confirm Purchase</button>
+</main>
 
 <footer>
-  <p>&copy; 2024 KinoXP Cinema. All rights reserved.</p>
+  <p>Contact us: contact@kinoxp.com</p>
 </footer>
-
-<script src="/js/purchase.js"></script> <!-- Adjusted to serve static JS -->
 </body>
 </html>
