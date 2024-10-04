@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purchase Tickets</title>
+  <link rel="stylesheet" href="/css/styles.css"> <!-- Adjusted to serve static CSS -->
+</head>
+<body>
+<header>
+  <h1>Purchase Tickets</h1>
+</header>
+
+<!-- Ticket Purchase Form -->
+<section id="ticketPurchaseSection">
+  <h2>Select Your Seats</h2>
+  <div id="theaterSeating" class="theater-seating"></div>
+
+  <h3>Your Selected Seats:</h3>
+  <div id="selectedSeatsDisplay"></div>
+
+  <form id="ticketPurchaseForm" class="form">
+    <label for="movieId">Movie ID:</label>
+    <input type="text" id="movieId" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" required>
+
+    <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone" required>
+
+    <button type="button" class="button" id="mobilePayButton">Pay with MobilePay</button>
+  </form>
+</section>
+
+<footer>
+  <p>&copy; 2024 KinoXP Cinema. All rights reserved.</p>
+</footer>
+
+<script src="/js/purchase.js"></script> <!-- Adjusted to serve static JS -->
+</body>
+</html>
