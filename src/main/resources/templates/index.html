@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KinoXP Cinema</title>
-    <link rel="stylesheet" href="/css/styles.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Adjusted to serve static CSS -->
+    <script src="/js/index.js" defer></script> <!-- Load JS file -->
 </head>
 <body>
 <header>
     <h1>Welcome to KinoXP Cinema</h1>
     <button id="buyTicketsButton" class="button" onclick="window.location.href='/api/tickets/buy-tickets'">Buy Tickets</button>
-    <button id="loginButton" class="button" onclick="window.location.href='/login'">Log In</button> <!-- Login Button -->
+    <button id="loginButton" class="button" onclick="window.location.href='/login'">Log In</button>
 </header>
 
 <!-- Movie List Section -->
@@ -24,8 +25,5 @@
 <footer>
     <p>&copy; 2024 KinoXP Cinema. All rights reserved.</p>
 </footer>
-
-<!-- Load JavaScript file -->
-<script src="/js/index.js" defer></script> <!-- Load your JavaScript file at the end of body -->
 </body>
 </html>
