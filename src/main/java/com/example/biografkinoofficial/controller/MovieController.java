@@ -21,6 +21,7 @@ public class MovieController {
     @GetMapping
     public ResponseEntity<List<Movie>> getAllMovies() {
         List<Movie> movies = movieService.getAllMovies();
+        System.out.println("Fetched Movies: " + movies); // Add logging here
         return ResponseEntity.ok(movies);
     }
 

@@ -14,10 +14,14 @@ public class MovieService {
     private MovieRepository movieRepository;
 
     public List<Movie> getAllMovies() {
-        return movieRepository.findAll();
+        List<Movie> movies = movieRepository.findAll();
+        System.out.println("Movies from Repository: " + movies); // Add logging here
+        return movies;
     }
 
     public Movie saveMovie(Movie movie) {
         return movieRepository.save(movie);
     }
+
+
 }
