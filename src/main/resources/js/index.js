@@ -19,7 +19,7 @@ function fetchMovies() {
             movieList.innerHTML = '';
             movies.forEach(movie => {
                 const listItem = document.createElement('li');
-                listItem.textContent = `${movie.title} - ${new Date(movie.release_date).toLocaleDateString()}`; // Format date
+                listItem.textContent = `${movie.title} - ${movie.release_date} - Rating: ${movie.rating}`;
                 movieList.appendChild(listItem);
             });
         })
@@ -27,5 +27,5 @@ function fetchMovies() {
 }
 
 function redirectToPurchasePage() {
-    window.location.href = '/api/tickets/buy-tickets'; // Redirect to the purchase page
+    window.location.href = '/api/buy-tickets'; // Redirect to the purchase page
 }

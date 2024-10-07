@@ -1,4 +1,3 @@
-// MovieService.java
 package com.example.biografkinoofficial.service;
 
 import com.example.biografkinoofficial.entity.Movie;
@@ -14,13 +13,11 @@ public class MovieService {
     @Autowired
     private MovieRepository movieRepository;
 
-    // Fetch all movies from the database
     public List<Movie> getAllMovies() {
         return movieRepository.findAll();
     }
 
-    // Save a new movie to the database
     public Movie saveMovie(Movie movie) {
-        return movieRepository.save(movie); // Will use JPA to save the movie
+        return movieRepository.save(movie);
     }
 }
