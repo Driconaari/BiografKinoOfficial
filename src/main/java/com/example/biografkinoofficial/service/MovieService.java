@@ -13,8 +13,12 @@ public class MovieService {
     @Autowired
     private MovieRepository movieRepository;
 
-    public Page<Movie> getMovies(int page, int size) {
-        return movieRepository.findAll(PageRequest.of(page, size));
+    public Page<Movie> getMovies(int page, int size, String search) {
+        if (search == null || search.isEmpty()) {
+            return movieRepository.findAll(PageRequest.of(page, size));
+        } else {
+            return movieRepository.findByTitleContainingIgnoreCase(search, PageRequest.of(page, size));
+        }
     }
 
     public Movie saveMovie(Movie movie) {

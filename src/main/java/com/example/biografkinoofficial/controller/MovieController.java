@@ -17,8 +17,9 @@ public class MovieController {
     @GetMapping
     public ResponseEntity<Page<Movie>> getMovies(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        Page<Movie> movies = movieService.getMovies(page, size);
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) String search) {
+        Page<Movie> movies = movieService.getMovies(page, size, search);
         return ResponseEntity.ok(movies);
     }
 

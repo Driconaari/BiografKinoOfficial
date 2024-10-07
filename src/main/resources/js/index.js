@@ -6,25 +6,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const nextPageButton = document.getElementById('nextPageButton');
     const prevPageButton = document.getElementById('prevPageButton');
+    const searchButton = document.getElementById('searchButton');
+    const searchInput = document.getElementById('searchInput');
 
     nextPageButton.addEventListener('click', () => {
         currentPage++;
-        fetchMovies(currentPage, pageSize);
+        fetchMovies(currentPage, pageSize, searchInput.value);
     });
 
     prevPageButton.addEventListener('click', () => {
         if (currentPage > 0) {
             currentPage--;
-            fetchMovies(currentPage, pageSize);
+            fetchMovies(currentPage, pageSize, searchInput.value);
         }
+    });
+
+    searchButton.addEventListener('click', () => {
+        currentPage = 0;
+        fetchMovies(currentPage, pageSize, searchInput.value);
     });
 
     const buyTicketsButton = document.getElementById('buyTicketsButton');
     buyTicketsButton.addEventListener('click', redirectToPurchasePage);
 });
 
-function fetchMovies(page, size) {
-    fetch(`/api/movies?page=${page}&size=${size}`)
+function fetchMovies(page, size, search = '') {
+    fetch(`/api/movies?page=${page}&size=${size}&search=${search}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
