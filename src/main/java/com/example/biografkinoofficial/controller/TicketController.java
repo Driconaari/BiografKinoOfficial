@@ -2,7 +2,8 @@ package com.example.biografkinoofficial.controller;
 
 import com.example.biografkinoofficial.entity.Movie;
 import com.example.biografkinoofficial.entity.Showing;
-import com.example.biografkinoofficial.service.TicketService; // Ensure this is the correct import for your service
+import com.example.biografkinoofficial.service.MovieService;
+import com.example.biografkinoofficial.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -19,18 +19,21 @@ import java.util.List;
 public class TicketController {
 
     @Autowired
-    private TicketService ticketService; // Assuming you have a service to handle Ticket logic
+    private TicketService ticketService;
+
+    @Autowired
+    private MovieService movieService; // Inject MovieService
 
     @GetMapping("/movies")
     public String listMovies(Model model) {
-        List<Movie> movies = getAllMovies(); // Fetch movie list from a service or database
+        List<Movie> movies = getAllMovies(); // Fetch movie list from the database
         model.addAttribute("movies", movies);
         return "index"; // This returns the index.html template
     }
 
     @GetMapping("/showing/{showingId}")
     public ResponseEntity<Showing> getShowingDetails(@PathVariable int showingId) {
-        Showing showing = ticketService.getShowingById(showingId); // Fetch showing details from service
+        Showing showing = ticketService.getShowingById(showingId);
         return ResponseEntity.ok(showing);
     }
 
@@ -40,11 +43,6 @@ public class TicketController {
     }
 
     private List<Movie> getAllMovies() {
-        // Dummy data for now, replace with actual database calls
-        return List.of(
-                new Movie("Inception", new Date(), 8.8, 148, "Sci-Fi", 13),
-                new Movie("Titanic", new Date(), 7.8, 195, "Romance", 12),
-                new Movie("Avengers: Endgame", new Date(), 8.4, 181, "Action", 13)
-        );
+        return movieService.getAllMovies(); // Fetch movies from the database
     }
 }

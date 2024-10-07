@@ -25,7 +25,10 @@ public class MovieController {
 
     @PostMapping
     public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
+        if (movie.getTitle() == null || movie.getTitle().isEmpty()) {
+            return ResponseEntity.badRequest().body(null);
+        }
         Movie savedMovie = movieService.saveMovie(movie);
-        return ResponseEntity.ok(savedMovie);
+        return ResponseEntity.status(201).body(savedMovie);
     }
 }
