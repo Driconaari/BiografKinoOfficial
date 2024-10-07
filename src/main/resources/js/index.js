@@ -11,10 +11,17 @@ function fetchMovies() {
         .then(response => response.json())
         .then(movies => {
             const movieList = document.getElementById('movieList');
-            movieList.innerHTML = '';
+            movieList.innerHTML = ''; // Clear existing content
             movies.forEach(movie => {
                 const listItem = document.createElement('li');
-                listItem.textContent = `${movie.title} - ${movie.releaseDate}`;
+                listItem.innerHTML = `
+                    <h3>${movie.title}</h3>
+                    <p>Release Date: ${new Date(movie.release_date).toLocaleDateString()}</p>
+                    <p>Rating: ${movie.rating}</p>
+                    <p>Length: ${movie.length} mins</p>
+                    <p>Genre: ${movie.genre}</p>
+                    <p>Age Limit: ${movie.age_limit}</p>
+                `;
                 movieList.appendChild(listItem);
             });
         })
