@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,13 @@
     <h2>Movies Currently Showing</h2>
     <input type="text" id="searchInput" placeholder="Search movies...">
     <button id="searchButton" class="button">Search</button>
-    <ul id="movieList" class="movie-list"></ul>
+    <ul id="movieList" class="movie-list">
+        <li th:each="movie : ${movies}">
+            <span th:text="${movie.title}">Movie Title</span> -
+            <span th:text="${movie.release_date}">Release Date</span> -
+            <span th:text="${movie.rating}">Rating</span>
+        </li>
+    </ul>
     <button id="prevPageButton" class="button">Previous Page</button>
     <button id="nextPageButton" class="button">Next Page</button>
 </section>
