@@ -1,20 +1,38 @@
 document.addEventListener("DOMContentLoaded", function () {
-    fetchMovies(); // Fetch the list of movies on page load
+    let currentPage = 0;
+    const pageSize = 10;
 
-    // Handle Buy Tickets button click
+    fetchMovies(currentPage, pageSize);
+
+    const nextPageButton = document.getElementById('nextPageButton');
+    const prevPageButton = document.getElementById('prevPageButton');
+
+    nextPageButton.addEventListener('click', () => {
+        currentPage++;
+        fetchMovies(currentPage, pageSize);
+    });
+
+    prevPageButton.addEventListener('click', () => {
+        if (currentPage > 0) {
+            currentPage--;
+            fetchMovies(currentPage, pageSize);
+        }
+    });
+
     const buyTicketsButton = document.getElementById('buyTicketsButton');
     buyTicketsButton.addEventListener('click', redirectToPurchasePage);
 });
 
-function fetchMovies() {
-    fetch('/api/movies')
+function fetchMovies(page, size) {
+    fetch(`/api/movies?page=${page}&size=${size}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
             return response.json();
         })
-        .then(movies => {
+        .then(data => {
+            const movies = data.content;
             const movieList = document.getElementById('movieList');
             movieList.innerHTML = '';
             movies.forEach(movie => {
@@ -27,5 +45,5 @@ function fetchMovies() {
 }
 
 function redirectToPurchasePage() {
-    window.location.href = '/api/buy-tickets'; // Redirect to the purchase page
+    window.location.href = '/api/buy-tickets';
 }

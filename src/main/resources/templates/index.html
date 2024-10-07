@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KinoXP Cinema</title>
-    <link rel="stylesheet" href="/css/styles.css"> <!-- Adjusted to serve static CSS -->
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
 <header>
@@ -13,18 +13,17 @@
     <button id="loginButton" class="button" onclick="window.location.href='/login'">Log In</button>
 </header>
 
-<!-- Movie List Section -->
 <section id="movieSection">
     <h2>Movies Currently Showing</h2>
-    <ul id="movieList" class="movie-list">
-        <!-- Movies will be populated here by JavaScript -->
-    </ul>
+    <ul id="movieList" class="movie-list"></ul>
+    <button id="prevPageButton" class="button">Previous Page</button>
+    <button id="nextPageButton" class="button">Next Page</button>
 </section>
 
 <footer>
     <p>&copy; 2024 KinoXP Cinema. All rights reserved.</p>
 </footer>
 
-<script src="/js/index.js" defer></script> <!-- Adjusted to serve static JS -->
+<script src="/js/index.js" defer></script>
 </body>
 </html>
