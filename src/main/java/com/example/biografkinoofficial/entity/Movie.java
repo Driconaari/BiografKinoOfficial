@@ -12,22 +12,22 @@ public class Movie {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  private Long id;  // Auto-generated ID
+
   private String title;
-  private Date releaseDate;
+  private Date release_date;
   private double rating;
   private double length;
   private String genre;
-  private int ageLimit;
+  private int age_limit;
 
-
-  public Movie(String title, Date releaseDate, double rating, double length, String genre, int ageLimit) {
+  public Movie(String title, Date release_date, double rating, double length, String genre, int age_limit) {
     this.title = title;
-    this.releaseDate = releaseDate;
+    this.release_date = release_date;
     this.rating = rating;
     this.length = length;
     this.genre = genre;
-    this.ageLimit = ageLimit;
+    this.age_limit = age_limit;
   }
   public Movie() {
 
@@ -41,12 +41,12 @@ public class Movie {
     this.title = title;
   }
 
-  public Date getReleaseDate() {
-    return releaseDate;
+  public Date getRelease_date() {
+    return release_date;
   }
 
-  public void setReleaseDate(Date releaseDate) {
-    this.releaseDate = releaseDate;
+  public void setRelease_date(Date releaseDate) {
+    this.release_date = releaseDate;
   }
 
   public double getRating() {
@@ -73,12 +73,12 @@ public class Movie {
     this.genre = genre;
   }
 
-  public int getAgeLimit() {
-    return ageLimit;
+  public int getAge_limit() {
+    return age_limit;
   }
 
-  public void setAgeLimit(int ageLimit) {
-    this.ageLimit = ageLimit;
+  public void setAge_limit(int ageLimit) {
+    this.age_limit = ageLimit;
   }
 
   public void setId(Long id) {
