@@ -19,31 +19,31 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf().disable()
-            .authorizeRequests()
-            .requestMatchers("/login", "/css/**", "/js/**", "/index.html", "/purchase.html").permitAll()
-            .requestMatchers("/admin/dashboard").hasRole("ADMIN")
-            .anyRequest().authenticated()
-            .and()
-            .formLogin()
-            .loginPage("/login")
-            .loginProcessingUrl("/login")
-            .defaultSuccessUrl("/admin/dashboard", true)
-            .permitAll()
-            .and()
-            .logout()
-            .logoutUrl("/logout")
-            .logoutSuccessUrl("/login?logout")
-            .permitAll();
+                .csrf().disable()
+                .authorizeRequests()
+                .requestMatchers("/login", "/css/**", "/js/**", "/index.html", "/purchase.html").permitAll()
+                .requestMatchers("/admin/dashboard").hasRole("ADMIN")
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/admin/dashboard", true)
+                .permitAll()
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout")
+                .permitAll();
         return http.build();
     }
 
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails user = User.withUsername("admin")
-            .password(passwordEncoder().encode("admin"))
-            .roles("ADMIN")
-            .build();
+                .password(passwordEncoder().encode("admin"))
+                .roles("ADMIN")
+                .build();
         return new InMemoryUserDetailsManager(user);
     }
 
