@@ -5,6 +5,7 @@ import com.example.biografkinoofficial.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -55,12 +56,12 @@ public class MovieService {
     }
 
     // Paginated movie fetching with optional search
+
     public Page<Movie> getMovies(int page, int size, String search) {
-        PageRequest pageRequest = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page, size);
         if (search != null && !search.isEmpty()) {
-            return movieRepository.findByTitleContainingIgnoreCase(search, pageRequest);
-        } else {
-            return movieRepository.findAll(pageRequest);
+            return movieRepository.findByTitleContainingIgnoreCase(search, pageable); // Assuming you have this method in the repository
         }
+        return movieRepository.findAll(pageable); // Fetch all if no search term
     }
 }
