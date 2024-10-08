@@ -22,9 +22,16 @@ public class MovieService {
         return movieRepository.findAll(); // Fetch all movies from the repository
     }
 
-    // Fetch a single movie by ID
+    /*// Fetch a single movie by ID
     public Movie getMovieById(Long id) {
         return movieRepository.findById(id).orElse(null);
+    }
+    
+     */
+
+    public Movie getMovieById(Long id) {
+        Optional<Movie> movieOptional = movieRepository.findById(id);
+        return movieOptional.orElse(null); // Return null if the movie is not found
     }
 
     // Add or save a movie

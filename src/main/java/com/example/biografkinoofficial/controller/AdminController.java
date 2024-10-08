@@ -46,6 +46,7 @@ public class AdminController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedMovie);
     }
 
+    /*
     // Update a movie (admin only)
     @PutMapping("/api/admin/movies/{id}")
     public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody Movie movie) {
@@ -53,12 +54,28 @@ public class AdminController {
         return updatedMovie != null ? ResponseEntity.ok(updatedMovie) : ResponseEntity.notFound().build();
     }
 
+
+     */
     // Delete a movie (admin only)
     @DeleteMapping("/api/admin/movies/{id}")
     public ResponseEntity<Void> deleteMovie(@PathVariable Long id) {
         boolean isDeleted = movieService.deleteMovie(id);
         return isDeleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
+    @GetMapping("/edit/{id}")
+    public String showEditMovieForm(@PathVariable Long id, Model model) {
+        Movie movie = movieService.getMovieById(id); // Fetch the movie by ID
+        model.addAttribute("movie", movie); // Add the movie to the model
+        return "editMovie"; // Return the name of the template
+    }
+
+    @PostMapping("/{id}")
+    public String updateMovie(@PathVariable Long id, @ModelAttribute Movie movie) {
+        movieService.updateMovie(id, movie);
+        return "redirect:/admin/movies"; // Redirect after update
+    }
+
+
 
 
 
