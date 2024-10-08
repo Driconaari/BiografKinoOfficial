@@ -23,7 +23,7 @@ public class AdminMovieController {
         model.addAttribute("movies", movies); // Add movies to model
         return "admindashboard"; // Return the view name
     }
-
+/*
     // Show the form to add a new movie
     @GetMapping("/add")
     public String showAddMovieForm(Model model) {
@@ -31,12 +31,18 @@ public class AdminMovieController {
         return "addMovie"; // Return the name of the template
     }
 
-    // Process the form to add a new movie
+
+ */
+   /* // Process the form to add a new movie
     @PostMapping("/add")
     public String addMovie(@ModelAttribute Movie movie) {
         movieService.saveMovie(movie); // Save the movie to the database
         return "redirect:/admin/movies"; // Redirect to the list of movies
     }
+
+
+    */
+
 
     // Show the form to edit an existing movie
     @GetMapping("/edit/{id}")
@@ -63,5 +69,17 @@ public class AdminMovieController {
     public String deleteMovie(@PathVariable Long id) {
         movieService.deleteMovie(id); // Delete the movie from the database
         return "redirect:/admin/movies"; // Redirect to the list of movies
+    }
+
+    @PostMapping
+    public String addMovie(@ModelAttribute Movie movie) {
+        movieService.saveMovie(movie); // Save the movie in the database
+        return "redirect:/admin/movies"; // Redirect to the movies list
+    }
+
+    @GetMapping("/add")
+    public String showAddMovieForm(Model model) {
+        model.addAttribute("movie", new Movie()); // Provide a new Movie object to the form
+        return "addMovie"; // Return the name of the template
     }
 }
