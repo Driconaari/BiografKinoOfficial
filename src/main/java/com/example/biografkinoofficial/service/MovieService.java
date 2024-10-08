@@ -8,7 +8,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MovieService {
@@ -16,27 +15,37 @@ public class MovieService {
     @Autowired
     private MovieRepository movieRepository;
 
+    // Fetch all movies
     public List<Movie> getAllMovies() {
         return movieRepository.findAll();
     }
 
+    // Fetch a single movie by ID
     public Movie getMovieById(Long id) {
-        Optional<Movie> movieOptional = movieRepository.findById(id);
-        return movieOptional.orElse(null);
+        return movieRepository.findById(id).orElse(null);
     }
 
+    // Add or save a movie
     public Movie saveMovie(Movie movie) {
         return movieRepository.save(movie);
     }
 
-    public Movie updateMovie(Long id, Movie movie) {
-        if (movieRepository.existsById(id)) {
-            movie.setId(id);
+    // Update an existing movie
+    public Movie updateMovie(Long id, Movie movieDetails) {
+        Movie movie = movieRepository.findById(id).orElse(null);
+        if (movie != null) {
+            movie.setTitle(movieDetails.getTitle());
+            movie.setRelease_date(movieDetails.getRelease_date());
+            movie.setRating(movieDetails.getRating());
+            movie.setLength(movieDetails.getLength());
+            movie.setGenre(movieDetails.getGenre());
+            movie.setAge_limit(movieDetails.getAge_limit());
             return movieRepository.save(movie);
         }
         return null;
     }
 
+    // Delete a movie
     public boolean deleteMovie(Long id) {
         if (movieRepository.existsById(id)) {
             movieRepository.deleteById(id);
@@ -45,11 +54,13 @@ public class MovieService {
         return false;
     }
 
+    // Paginated movie fetching with optional search
     public Page<Movie> getMovies(int page, int size, String search) {
-        if (search == null || search.isEmpty()) {
-            return movieRepository.findAll(PageRequest.of(page, size));
+        PageRequest pageRequest = PageRequest.of(page, size);
+        if (search != null && !search.isEmpty()) {
+            return movieRepository.findByTitleContainingIgnoreCase(search, pageRequest);
         } else {
-            return movieRepository.findByTitleContainingIgnoreCase(search, PageRequest.of(page, size));
+            return movieRepository.findAll(pageRequest);
         }
     }
 }

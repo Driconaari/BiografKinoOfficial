@@ -14,6 +14,7 @@ public class MovieController {
     @Autowired
     private MovieService movieService;
 
+    // Fetch paginated and filtered list of movies (public access)
     @GetMapping
     public ResponseEntity<Page<Movie>> getMovies(
             @RequestParam(defaultValue = "0") int page,
@@ -23,6 +24,7 @@ public class MovieController {
         return ResponseEntity.ok(movies);
     }
 
+    // Add a movie (admin only, should be in AdminController, not here)
     @PostMapping
     public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
         if (movie.getTitle() == null || movie.getTitle().isEmpty()) {

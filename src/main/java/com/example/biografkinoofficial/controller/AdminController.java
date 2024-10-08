@@ -16,35 +16,41 @@ public class AdminController {
     @Autowired
     private MovieService movieService;
 
+    // Admin dashboard page
     @GetMapping("/admin/dashboard")
     public String adminDashboard() {
-        return "admindashboard"; // Return the view name for the admin dashboard
+        return "admindashboard";  // Thymeleaf template for the admin panel
     }
 
+    // Fetch all movies (admin only)
     @GetMapping("/api/admin/movies")
     public ResponseEntity<List<Movie>> getAllMovies() {
         List<Movie> movies = movieService.getAllMovies();
         return ResponseEntity.ok(movies);
     }
 
+    // Get a movie by ID (admin only)
     @GetMapping("/api/admin/movies/{id}")
     public ResponseEntity<Movie> getMovieById(@PathVariable Long id) {
         Movie movie = movieService.getMovieById(id);
         return movie != null ? ResponseEntity.ok(movie) : ResponseEntity.notFound().build();
     }
 
+    // Add a movie (admin only)
     @PostMapping("/api/admin/movies")
     public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
         Movie savedMovie = movieService.saveMovie(movie);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedMovie);
     }
 
+    // Update a movie (admin only)
     @PutMapping("/api/admin/movies/{id}")
     public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody Movie movie) {
         Movie updatedMovie = movieService.updateMovie(id, movie);
         return updatedMovie != null ? ResponseEntity.ok(updatedMovie) : ResponseEntity.notFound().build();
     }
 
+    // Delete a movie (admin only)
     @DeleteMapping("/api/admin/movies/{id}")
     public ResponseEntity<Void> deleteMovie(@PathVariable Long id) {
         boolean isDeleted = movieService.deleteMovie(id);

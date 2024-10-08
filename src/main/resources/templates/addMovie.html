@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add New Movie</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<header>
+  <h1>Add New Movie</h1>
+</header>
+
+<main>
+  <form th:action="@{/admin/movies/add}" method="post">
+    <label>Title: <input type="text" name="title" /></label><br/>
+    <label>Release Date: <input type="date" name="release_date" /></label><br/>
+    <label>Rating: <input type="number" step="0.1" name="rating" /></label><br/>
+    <label>Length: <input type="number" name="length" /></label><br/>
+    <label>Genre: <input type="text" name="genre" /></label><br/>
+    <label>Age Limit: <input type="number" name="age_limit" /></label><br/>
+    <button type="submit">Add Movie</button>
+  </form>
+</main>
+
+<footer>
+  <p>&copy; 2024 KinoXP Cinema. Admin Dashboard.</p>
+</footer>
+</body>
+</html>

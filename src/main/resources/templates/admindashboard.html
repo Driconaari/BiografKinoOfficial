@@ -1,10 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Dashboard</title>
+    <title>Admin Dashboard - Movies</title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <h1>Welcome to the Admin Dashboard</h1>
+<header>
+    <h1>Admin Dashboard - Movies</h1>
+    <button onclick="window.location.href='/admin/movies/add'">Add New Movie</button>
+</header>
+
+<main>
+    <h2>All Movies</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Release Date</th>
+            <th>Rating</th>
+            <th>Genre</th>
+            <th>Length</th>
+            <th>Age Limit</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="movie : ${movies}">
+            <td th:text="${movie.title}"></td>
+            <td th:text="${movie.release_date}"></td>
+            <td th:text="${movie.rating}"></td>
+            <td th:text="${movie.genre}"></td>
+            <td th:text="${movie.length}"></td>
+            <td th:text="${movie.age_limit}"></td>
+            <td>
+                <button th:onclick="'window.location.href=\'/admin/movies/edit/' + ${movie.id} + '\'"'>Edit</button>
+                <form th:action="@{/admin/movies/delete/{id}(id=${movie.id})}" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+<footer>
+    <p>&copy; 2024 KinoXP Cinema. Admin Dashboard.</p>
+</footer>
 </body>
 </html>
