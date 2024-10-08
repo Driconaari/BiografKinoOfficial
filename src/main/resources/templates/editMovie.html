@@ -23,7 +23,7 @@
     <input type="text" id="title" name="title" th:value="${movie.title}" required>
 
     <label for="releaseDate">Release Date:</label>
-    <input type="date" id="releaseDate" name="release_date" th:value="${movie.release_date}" required>
+    <input type="date" id="releaseDate" name="release_date" th:value="${#dates.format(movie.release_date, 'yyyy-MM-dd')}" required>
 
     <label for="rating">Rating:</label>
     <input type="number" id="rating" name="rating" th:value="${movie.rating}" required>
