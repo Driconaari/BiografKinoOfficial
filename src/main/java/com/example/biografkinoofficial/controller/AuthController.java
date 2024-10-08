@@ -1,6 +1,5 @@
 package com.example.biografkinoofficial.controller;
 
-
 import com.example.biografkinoofficial.entity.UserLogin;
 import com.example.biografkinoofficial.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,11 @@ public class AuthController {
     public String login(@RequestBody UserLogin user) {
         UserLogin foundUser = userRepository.findByUsername(user.getUsername());
         if (foundUser != null && foundUser.getPassword().equals(user.getPassword())) {
-            return "Login successful";
+            if (foundUser.getRole().equals("ADMIN")) {
+                return "Admin login successful";
+            } else {
+                return "User login successful";
+            }
         } else {
             return "Invalid username or password";
         }
