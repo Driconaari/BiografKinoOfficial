@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Movies</title>
     <link rel="stylesheet" href="/css/styles.css">
-    <script src="/js/admin-dashboard.js" defer></script> <!-- Include your JS for search and pagination -->
 </head>
 <body>
 <header>
@@ -12,30 +12,27 @@
     <button onclick="window.location.href='/admin/movies/add'">Add New Movie</button>
 </header>
 
-<main>
-    <section id="movieSection">
-        <h2>All Movies</h2>
-        <input type="text" id="searchInput" placeholder="Search movies..." />
-        <button id="searchButton" class="button">Search</button>
+<section id="movieSection">
+    <h2>All Movies</h2>
+    <input type="text" id="searchInput" placeholder="Search movies...">
+    <button id="searchButton" class="button">Search</button>
+    <ul id="movieList" class="movie-list">
+        <li th:each="movie : ${movies}">
+            <span th:text="${movie.title}">Movie Title</span> -
+            <span th:text="${#dates.format(movie.release_date, 'yyyy-MM-dd')}">Release Date</span> -
+            <span th:text="${movie.rating}">Rating</span>
+            <span> - <a th:href="@{/admin/movies/edit/{id}(id=${movie.id})}">Edit</a></span>
+            <form th:action="@{/admin/movies/delete/{id}(id=${movie.id})}" method="post" style="display:inline;">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+    </ul>
 
-        <ul id="movieList" class="movie-list">
-            <li th:each="movie : ${movies}">
-                <span th:text="${movie.title}">Movie Title</span> -
-                <span th:text="${#dates.format(movie.release_date, 'yyyy-MM-dd')}">Release Date</span> -
-                <span th:text="${movie.rating}">Rating</span>
-                <span> - <a th:href="@{/admin/movies/edit/{id}(id=${movie.id})}">Edit</a></span>
-                <form th:action="@{/admin/movies/delete/{id}(id=${movie.id})}" method="post" style="display:inline;">
-                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                    <button type="submit">Delete</button>
-                </form>
-            </li>
-        </ul>
-
-        <!-- Pagination Buttons -->
-        <button id="prevPageButton" class="button">Previous Page</button>
-        <button id="nextPageButton" class="button">Next Page</button>
-    </section>
-</main>
+    <!-- Pagination Buttons -->
+    <button id="prevPageButton" class="button">Previous Page</button>
+    <button id="nextPageButton" class="button">Next Page</button>
+</section>
 
 <footer>
     <p>&copy; 2024 KinoXP Cinema. Admin Dashboard.</p>

@@ -18,7 +18,7 @@ public class MovieService {
 
     // Fetch all movies
     public List<Movie> getAllMovies() {
-        return movieRepository.findAll();
+        return movieRepository.findAll(); // Fetch all movies from the repository
     }
 
     // Fetch a single movie by ID

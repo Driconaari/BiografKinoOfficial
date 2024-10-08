@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +19,10 @@ public class AdminController {
 
     // Admin dashboard page
     @GetMapping("/admin/dashboard")
-    public String adminDashboard() {
-        return "admindashboard";  // Thymeleaf template for the admin panel
+    public String adminDashboard(Model model) {
+        List<Movie> movies = movieService.getAllMovies();
+        model.addAttribute("movies", movies); // Add movies to the model for Thymeleaf
+        return "admindashboard"; // Return the view name for the admin dashboard
     }
 
     // Fetch all movies (admin only)
