@@ -19,32 +19,33 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf().disable()
-            .authorizeHttpRequests()
-            .requestMatchers("/login", "/css/**", "/js/**", "/index", "/purchase").permitAll()
-            .requestMatchers("/admin/dashboard").hasRole("ADMIN")
-            .anyRequest().authenticated()
-            .and()
-            .formLogin()
-            .loginPage("/login")
-            .loginProcessingUrl("/login")
-            .defaultSuccessUrl("/admin/dashboard", true)
-            .permitAll()
-            .and()
-            .logout()
-            .logoutUrl("/logout")
-            .logoutSuccessUrl("/login?logout")
-            .permitAll();
+                .csrf().disable() // Disable CSRF for simplicity (you can re-enable if needed)
+                .authorizeHttpRequests()
+                // Permit all access to the root path, index page, static resources, and purchase page
+                .requestMatchers("/", "/index", "/css/**", "/js/**", "/images/**", "/purchase").permitAll()
+                .requestMatchers("/admin/dashboard").hasRole("ADMIN") // Restrict admin dashboard to admins
+                .anyRequest().authenticated() // All other requests require authentication
+                .and()
+                .formLogin()
+                .loginPage("/login") // Custom login page
+                .loginProcessingUrl("/login") // Process login
+                .defaultSuccessUrl("/admin/dashboard", true) // Redirect to dashboard after login
+                .permitAll()
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout") // Redirect to login after logout
+                .permitAll();
         return http.build();
     }
 
     @Bean
     public UserDetailsService userDetailsService() {
-        UserDetails user = User.withUsername("admin")
-            .password(passwordEncoder().encode("admin"))
-            .roles("ADMIN")
-            .build();
-        return new InMemoryUserDetailsManager(user);
+        UserDetails admin = User.withUsername("admin")
+                .password(passwordEncoder().encode("admin"))
+                .roles("ADMIN")
+                .build();
+        return new InMemoryUserDetailsManager(admin);
     }
 
     @Bean
