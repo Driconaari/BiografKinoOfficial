@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MovieService {
@@ -32,18 +33,19 @@ public class MovieService {
     }
 
     // Update an existing movie
-    public Movie updateMovie(Long id, Movie movieDetails) {
-        Movie movie = movieRepository.findById(id).orElse(null);
-        if (movie != null) {
-            movie.setTitle(movieDetails.getTitle());
-            movie.setRelease_date(movieDetails.getRelease_date());
-            movie.setRating(movieDetails.getRating());
-            movie.setLength(movieDetails.getLength());
-            movie.setGenre(movieDetails.getGenre());
-            movie.setAge_limit(movieDetails.getAge_limit());
-            return movieRepository.save(movie);
+    public Movie updateMovie(Long id, Movie movie) {
+        Optional<Movie> existingMovieOpt = movieRepository.findById(id);
+        if (existingMovieOpt.isPresent()) {
+            Movie existingMovie = existingMovieOpt.get();
+            existingMovie.setTitle(movie.getTitle());
+            existingMovie.setRelease_date(movie.getRelease_date());
+            existingMovie.setRating(movie.getRating());
+            existingMovie.setGenre(movie.getGenre());
+            existingMovie.setLength(movie.getLength());
+            existingMovie.setAge_limit(movie.getAge_limit());
+            return movieRepository.save(existingMovie); // Save and return the updated movie
         }
-        return null;
+        return null; // or throw an exception if the movie is not found
     }
 
     // Delete a movie

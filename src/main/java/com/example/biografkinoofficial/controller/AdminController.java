@@ -59,4 +59,7 @@ public class AdminController {
         boolean isDeleted = movieService.deleteMovie(id);
         return isDeleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
+
+
+
 }
