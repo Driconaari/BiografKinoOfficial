@@ -19,67 +19,51 @@ public class AdminMovieController {
     // Show all movies
     @GetMapping
     public String showAllMovies(Model model) {
-        List<Movie> movies = movieService.getAllMovies(); // Fetch all movies
-        model.addAttribute("movies", movies); // Add movies to model
-        return "admindashboard"; // Return the view name
+        List<Movie> movies = movieService.getAllMovies();
+        model.addAttribute("movies", movies);
+        return "admindashboard"; // Return the dashboard view with all movies
     }
-/*
+
     // Show the form to add a new movie
     @GetMapping("/add")
     public String showAddMovieForm(Model model) {
-        model.addAttribute("movie", new Movie()); // Provide a new Movie object to the form
-        return "addMovie"; // Return the name of the template
+        model.addAttribute("movie", new Movie()); // New Movie object for the form
+        return "addMovie"; // Return the form view
     }
 
-
- */
-   /* // Process the form to add a new movie
-    @PostMapping("/add")
+    // Process the form to add a new movie
+    @PostMapping
     public String addMovie(@ModelAttribute Movie movie) {
-        movieService.saveMovie(movie); // Save the movie to the database
-        return "redirect:/admin/movies"; // Redirect to the list of movies
+        movieService.saveMovie(movie);
+        return "redirect:/admin/movies"; // Redirect to the movie list
     }
-
-
-    */
-
 
     // Show the form to edit an existing movie
     @GetMapping("/edit/{id}")
     public String showEditMovieForm(@PathVariable Long id, Model model) {
-        Movie movie = movieService.getMovieById(id);
+        Movie movie = movieService.getMovieById(id).orElse(null);
         if (movie != null) {
-            model.addAttribute("movie", movie); // Provide the existing Movie object to the form
-            return "editMovie"; // Return the name of the template
+            model.addAttribute("movie", movie);
+            return "editMovie"; // Return the edit form view
         }
         return "redirect:/admin/movies"; // Redirect if movie not found
     }
 
-  // Handle movie update form submission
-    @PostMapping("/edit/{id}")
+    // Handle movie update
+    @PostMapping("/{id}")
     public String updateMovie(@PathVariable Long id, @ModelAttribute Movie movie) {
-        movie.setId(id); // Set the movie ID from the path variable
-        movieService.updateMovie(id, movie); // Pass both the ID and the Movie object to the service
-        return "redirect:/admin/movies"; // Redirect to the list of movies
+        Movie updatedMovie = movieService.updateMovie(id, movie);
+        if (updatedMovie != null) {
+            return "redirect:/admin/movies"; // Redirect after a successful update
+        } else {
+            return "error"; // Return an error page or handle as needed
+        }
     }
-
 
     // Handle movie deletion
     @PostMapping("/delete/{id}")
     public String deleteMovie(@PathVariable Long id) {
-        movieService.deleteMovie(id); // Delete the movie from the database
-        return "redirect:/admin/movies"; // Redirect to the list of movies
-    }
-
-    @PostMapping
-    public String addMovie(@ModelAttribute Movie movie) {
-        movieService.saveMovie(movie); // Save the movie in the database
-        return "redirect:/admin/movies"; // Redirect to the movies list
-    }
-
-    @GetMapping("/add")
-    public String showAddMovieForm(Model model) {
-        model.addAttribute("movie", new Movie()); // Provide a new Movie object to the form
-        return "addMovie"; // Return the name of the template
+        movieService.deleteMovie(id);
+        return "redirect:/admin/movies"; // Redirect to the movie list after deletion
     }
 }
