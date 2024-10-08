@@ -1,33 +1,19 @@
+<!-- src/main/resources/templates/login.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - KinoXP Cinema</title>
-  <link rel="stylesheet" href="/css/styles.css"> <!-- Link your CSS file -->
+    <meta charset="UTF-8">
+    <title>Login</title>
 </head>
 <body>
-<header>
-  <h1>Log In</h1>
-</header>
-
-<main>
-  <form action="/api/login" method="POST"> <!-- Adjust this action URL as necessary -->
-    <div>
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required>
-    </div>
-    <div>
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required>
-    </div>
-    <button type="submit">Log In</button>
-  </form>
-  <p><a href="/register">Don't have an account? Register here</a></p> <!-- Optional link to register -->
-</main>
-
-<footer>
-  <p>Contact us: contact@kinoxp.com</p>
-</footer>
+    <form action="/login" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <button type="submit">Login</button>
+    </form>
 </body>
 </html>
