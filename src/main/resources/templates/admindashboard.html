@@ -28,14 +28,18 @@
         <tbody>
         <tr th:each="movie : ${movies}">
             <td th:text="${movie.title}"></td>
-            <td th:text="${movie.release_date}"></td>
+            <!-- Format release_date to a readable format -->
+            <td th:text="${#dates.format(movie.release_date, 'yyyy-MM-dd')}"></td>
             <td th:text="${movie.rating}"></td>
             <td th:text="${movie.genre}"></td>
             <td th:text="${movie.length}"></td>
             <td th:text="${movie.age_limit}"></td>
             <td>
-                <button th:onclick="'window.location.href=\'/admin/movies/edit/' + ${movie.id} + '\'"'>Edit</button>
+                <!-- Use th:href instead of th:onclick for edit navigation -->
+                <a th:href="@{/admin/movies/edit/{id}(id=${movie.id})}" class="button">Edit</a>
+                <!-- Add CSRF token for delete form -->
                 <form th:action="@{/admin/movies/delete/{id}(id=${movie.id})}" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                     <button type="submit">Delete</button>
                 </form>
             </td>
