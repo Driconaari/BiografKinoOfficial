@@ -1,24 +1,46 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add New Movie</title>
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
 <header>
   <h1>Add New Movie</h1>
+  <button onclick="window.location.href='/admin/dashboard'">Back to Dashboard</button>
 </header>
 
 <main>
-  <form th:action="@{/admin/movies/add}" method="post">
-    <label>Title: <input type="text" name="title" /></label><br/>
-    <label>Release Date: <input type="date" name="release_date" /></label><br/>
-    <label>Rating: <input type="number" step="0.1" name="rating" /></label><br/>
-    <label>Length: <input type="number" name="length" /></label><br/>
-    <label>Genre: <input type="text" name="genre" /></label><br/>
-    <label>Age Limit: <input type="number" name="age_limit" /></label><br/>
-    <button type="submit">Add Movie</button>
+  <form th:action="@{/api/admin/movies}" method="post" th:object="${movie}">
+    <div>
+      <label for="title">Title:</label>
+      <input type="text" id="title" th:field="*{title}" required/>
+    </div>
+    <div>
+      <label for="release_date">Release Date:</label>
+      <input type="date" id="release_date" th:field="*{release_date}" required/>
+    </div>
+    <div>
+      <label for="rating">Rating:</label>
+      <input type="number" id="rating" th:field="*{rating}" step="0.1" required/>
+    </div>
+    <div>
+      <label for="genre">Genre:</label>
+      <input type="text" id="genre" th:field="*{genre}" required/>
+    </div>
+    <div>
+      <label for="length">Length (in minutes):</label>
+      <input type="number" id="length" th:field="*{length}" required/>
+    </div>
+    <div>
+      <label for="age_limit">Age Limit:</label>
+      <input type="number" id="age_limit" th:field="*{age_limit}" required/>
+    </div>
+    <div>
+      <button type="submit">Add Movie</button>
+    </div>
   </form>
 </main>
 
