@@ -16,6 +16,8 @@ public class AdminController {
     @Autowired
     private MovieService movieService;
 
+
+
     @GetMapping
     public ResponseEntity<List<Movie>> getAllMovies() {
         List<Movie> movies = movieService.getAllMovies();
@@ -26,6 +28,11 @@ public class AdminController {
     public ResponseEntity<Movie> getMovieById(@PathVariable Long id) {
         Movie movie = movieService.getMovieById(id);
         return movie != null ? ResponseEntity.ok(movie) : ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("(/admin/dashboard")
+    public String adminDashboard() {
+        return "admin/dashboard"; // Return the view name for the admin dashboard
     }
 
     @PostMapping
