@@ -1,4 +1,4 @@
-package com.example.biografkinoofficial.security;// src/main/java/com/example/biografkinoofficial/config/SecurityConfig.java
+package com.example.biografkinoofficial.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

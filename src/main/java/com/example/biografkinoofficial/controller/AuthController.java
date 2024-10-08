@@ -13,6 +13,25 @@ public class AuthController {
     @Autowired
     UserRepository userRepository;
 
+    @GetMapping("/login")
+    @ResponseStatus(HttpStatus.OK)
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping("/admin")
+    @ResponseStatus(HttpStatus.OK)
+    public String admin() {
+        return "Admin page";
+    }
+
+    @GetMapping("/user")
+    @ResponseStatus(HttpStatus.OK)
+    public String user() {
+        return "User page";
+    }
+
+
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.OK)
     public String login(@RequestBody UserLogin user) {
